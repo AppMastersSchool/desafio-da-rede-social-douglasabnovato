@@ -1,0 +1,35 @@
+import { autorDoPost } from "../usuarios.js";
+import Avatar from "./Avatar.jsx";
+import { linkPerfil } from "../rota.js";
+
+const formatar = new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" });
+
+export default function ListaPosts({ posts, rotulo = "Posts", vazio = "Nenhum post ainda. Que tal o primeiro?" }) {
+  if (!posts.length) return <p className="vazio">{vazio}</p>;
+
+  return (
+    <ul className="posts" aria-label={rotulo}>
+      {posts.map((post) => {
+        const autor = autorDoPost(post);
+        return (
+          <li key={post.id} className="cartao post">
+            <div className="post-autor">
+              <Avatar usuario={autor} />
+              {autor.id ? (
+                <a className="post-nome" href={linkPerfil(autor.id)}>
+                  {autor.nome}
+                </a>
+              ) : (
+                <span className="post-nome">{autor.nome}</span>
+              )}
+            </div>
+            <p className="post-texto">{post.texto}</p>
+            <time className="post-data" dateTime={post.criadoEm}>
+              {formatar.format(new Date(post.criadoEm))}
+            </time>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
