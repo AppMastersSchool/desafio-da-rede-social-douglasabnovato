@@ -40,7 +40,7 @@ describe("perfil (desafio 3)", () => {
     const titulo = screen.getByRole("heading", { level: 2, name: "Bruno Costa" });
     expect(titulo).toHaveFocus();
     expect(screen.getByText("Aprendendo React aos poucos.")).toBeInTheDocument();
-    expect(within(screen.getByRole("region", { name: "Bruno Costa" })).getByRole("img", { name: "Foto de Bruno Costa" })).toBeInTheDocument();
+    expect(within(screen.getByRole("region", { name: "Bruno Costa" })).getAllByRole("img", { name: "Foto de Bruno Costa" }).length).toBeGreaterThan(0);
     expect(screen.queryByLabelText("O que você quer compartilhar?")).not.toBeInTheDocument();
 
     await irPara(screen.getByRole("link", { name: "Voltar ao feed" }).getAttribute("href"));

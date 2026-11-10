@@ -2,8 +2,9 @@ import { useEffect, useRef } from "react";
 import { buscarUsuario } from "../usuarios.js";
 import { linkFeed } from "../rota.js";
 import Avatar from "./Avatar.jsx";
+import ListaPosts from "./ListaPosts.jsx";
 
-export default function Perfil({ id }) {
+export default function Perfil({ id, posts = [] }) {
   const usuario = buscarUsuario(id);
   const titulo = useRef(null);
 
@@ -11,6 +12,12 @@ export default function Perfil({ id }) {
   useEffect(() => {
     titulo.current?.focus();
   }, [id]);
+
+  // Desafio 5: só os posts deste usuário, do mais novo para o mais antigo
+  const dele = usuario
+    ? posts.filter((p) => p.autorId === usuario.id).sort((a, b) => b.criadoEm.localeCompare(a.criadoEm))
+    : [];
+  const total = dele.length;
 
   if (!usuario) {
     return (
@@ -34,8 +41,10 @@ export default function Perfil({ id }) {
             {usuario.nome}
           </h2>
           <p className="perfil-bio">{usuario.bio}</p>
+          <p className="perfil-total">{total === 1 ? "1 post" : `${total} posts`}</p>
         </div>
       </div>
+      <ListaPosts posts={dele} rotulo={`Posts de ${usuario.nome}`} vazio="Este usuário ainda não publicou." />
     </section>
   );
 }

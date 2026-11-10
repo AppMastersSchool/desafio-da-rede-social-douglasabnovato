@@ -4,11 +4,11 @@ import { linkPerfil } from "../rota.js";
 
 const formatar = new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" });
 
-export default function ListaPosts({ posts, vazio = "Nenhum post ainda. Que tal o primeiro?" }) {
+export default function ListaPosts({ posts, rotulo = "Posts", vazio = "Nenhum post ainda. Que tal o primeiro?" }) {
   if (!posts.length) return <p className="vazio">{vazio}</p>;
 
   return (
-    <ul className="posts" aria-label="Posts">
+    <ul className="posts" aria-label={rotulo}>
       {posts.map((post) => {
         const autor = autorDoPost(post);
         return (

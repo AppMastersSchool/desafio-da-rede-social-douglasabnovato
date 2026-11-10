@@ -38,7 +38,7 @@ export default function App({ storage = storagePadrao }) {
       </header>
       <main id="conteudo" className="conteudo">
         {rota.pagina === "perfil" ? (
-          <Perfil id={rota.id} />
+          <Perfil id={rota.id} posts={posts} />
         ) : (
           <>
             <NovoPost onPublicar={publicar} />

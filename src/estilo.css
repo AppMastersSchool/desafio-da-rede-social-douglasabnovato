@@ -167,3 +167,5 @@ select {
 
 a.post-nome { text-decoration: none; }
 a.post-nome:hover { text-decoration: underline; }
+
+.perfil-total { margin: 4px 0 0; font-weight: 600; }
