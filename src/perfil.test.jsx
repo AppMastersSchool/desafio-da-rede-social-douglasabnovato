@@ -54,6 +54,13 @@ describe("perfil (desafio 3)", () => {
     expect(screen.getByRole("link", { name: "Voltar ao feed" })).toHaveAttribute("href", "#/");
   });
 
+  it("hash com codificação inválida abre em 'Perfil não encontrado', sem tela branca", () => {
+    expect(lerRota("#/perfil/%E0")).toEqual({ pagina: "perfil", id: "%E0" });
+    window.location.hash = "#/perfil/%E0";
+    render(<App storage={storageEmMemoria()} />);
+    expect(screen.getByRole("heading", { name: "Perfil não encontrado" })).toBeInTheDocument();
+  });
+
   it("autor removido não vira link", () => {
     const storage = storageEmMemoria({
       "rede-social:posts": JSON.stringify([{ id: "1", texto: "x", autorId: "apagado", criadoEm: "2026-11-10T12:00:00.000Z" }]),
