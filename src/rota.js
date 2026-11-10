@@ -6,10 +6,21 @@ import { useEffect, useState } from "react";
 export const linkPerfil = (id) => `#/perfil/${encodeURIComponent(id)}`;
 export const linkFeed = "#/";
 
+// "%E0" e outros códigos inválidos fazem decodeURIComponent lançar URIError.
+// Nesse caso o id fica como veio: nenhum usuário tem "%" no id (linkPerfil codifica),
+// então a tela cai em "Perfil não encontrado" em vez de ficar branca.
+function decodificar(trecho) {
+  try {
+    return decodeURIComponent(trecho);
+  } catch {
+    return trecho;
+  }
+}
+
 /** Converte o hash em { pagina, id }. */
 export function lerRota(hash) {
   const perfil = /^#\/perfil\/([^/]+)\/?$/.exec(hash);
-  if (perfil) return { pagina: "perfil", id: decodeURIComponent(perfil[1]) };
+  if (perfil) return { pagina: "perfil", id: decodificar(perfil[1]) };
   return { pagina: "feed" };
 }
 
