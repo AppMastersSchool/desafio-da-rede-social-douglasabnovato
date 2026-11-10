@@ -116,3 +116,14 @@ button {
 }
 
 .post-data { color: var(--texto-suave); font-size: 0.875rem; }
+
+.avatar { border-radius: 50%; flex: none; }
+
+.post-autor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.post-nome { font-weight: 600; }

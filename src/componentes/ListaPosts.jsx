@@ -1,3 +1,6 @@
+import { autorDoPost } from "../usuarios.js";
+import Avatar from "./Avatar.jsx";
+
 const formatar = new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" });
 
 export default function ListaPosts({ posts, vazio = "Nenhum post ainda. Que tal o primeiro?" }) {
@@ -5,14 +8,21 @@ export default function ListaPosts({ posts, vazio = "Nenhum post ainda. Que tal 
 
   return (
     <ul className="posts" aria-label="Posts">
-      {posts.map((post) => (
-        <li key={post.id} className="cartao post">
-          <p className="post-texto">{post.texto}</p>
-          <time className="post-data" dateTime={post.criadoEm}>
-            {formatar.format(new Date(post.criadoEm))}
-          </time>
-        </li>
-      ))}
+      {posts.map((post) => {
+        const autor = autorDoPost(post);
+        return (
+          <li key={post.id} className="cartao post">
+            <div className="post-autor">
+              <Avatar usuario={autor} />
+              <span className="post-nome">{autor.nome}</span>
+            </div>
+            <p className="post-texto">{post.texto}</p>
+            <time className="post-data" dateTime={post.criadoEm}>
+              {formatar.format(new Date(post.criadoEm))}
+            </time>
+          </li>
+        );
+      })}
     </ul>
   );
 }
