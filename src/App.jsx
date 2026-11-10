@@ -3,11 +3,14 @@ import { storage as storagePadrao } from "./storage.js";
 import NovoPost from "./componentes/NovoPost.jsx";
 import ListaPosts from "./componentes/ListaPosts.jsx";
 import SeletorAutor from "./componentes/SeletorAutor.jsx";
+import Perfil from "./componentes/Perfil.jsx";
 import { buscarUsuario, usuarios } from "./usuarios.js";
+import { useRota } from "./rota.js";
 
 const novoId = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(16).slice(2)}`;
 
 export default function App({ storage = storagePadrao }) {
+  const rota = useRota();
   const [posts, setPosts] = useState(() => storage.getPosts());
   // Desafio 1: o autor escolhido no topo assina os posts novos
   const [autor, setAutor] = useState(() => buscarUsuario(storage.getAutorAtual()) ?? usuarios[0]);
@@ -34,8 +37,14 @@ export default function App({ storage = storagePadrao }) {
         <SeletorAutor usuarios={usuarios} autor={autor} onTrocar={trocarAutor} />
       </header>
       <main id="conteudo" className="conteudo">
-        <NovoPost onPublicar={publicar} />
-        <ListaPosts posts={posts} />
+        {rota.pagina === "perfil" ? (
+          <Perfil id={rota.id} />
+        ) : (
+          <>
+            <NovoPost onPublicar={publicar} />
+            <ListaPosts posts={posts} />
+          </>
+        )}
       </main>
     </>
   );

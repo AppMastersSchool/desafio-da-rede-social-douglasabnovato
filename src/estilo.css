@@ -152,3 +152,18 @@ select {
   background: var(--fundo);
   color: var(--texto);
 }
+
+.perfil { display: grid; gap: 12px; }
+
+.perfil-cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.perfil h2 { margin: 0; }
+
+.perfil-bio { margin: 4px 0 0; color: var(--texto-suave); }
+
+a.post-nome { text-decoration: none; }
+a.post-nome:hover { text-decoration: underline; }

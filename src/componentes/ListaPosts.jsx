@@ -1,5 +1,6 @@
 import { autorDoPost } from "../usuarios.js";
 import Avatar from "./Avatar.jsx";
+import { linkPerfil } from "../rota.js";
 
 const formatar = new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" });
 
@@ -14,7 +15,13 @@ export default function ListaPosts({ posts, vazio = "Nenhum post ainda. Que tal 
           <li key={post.id} className="cartao post">
             <div className="post-autor">
               <Avatar usuario={autor} />
-              <span className="post-nome">{autor.nome}</span>
+              {autor.id ? (
+                <a className="post-nome" href={linkPerfil(autor.id)}>
+                  {autor.nome}
+                </a>
+              ) : (
+                <span className="post-nome">{autor.nome}</span>
+              )}
             </div>
             <p className="post-texto">{post.texto}</p>
             <time className="post-data" dateTime={post.criadoEm}>
