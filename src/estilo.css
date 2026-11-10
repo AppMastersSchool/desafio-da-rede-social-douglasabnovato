@@ -5,6 +5,7 @@
   --texto-suave: #4a5263;
   --destaque: #1d4ed8;
   --borda: #d5d9e0;
+  --erro: #b42318;
   color-scheme: light dark;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   line-height: 1.5;
@@ -18,6 +19,7 @@
     --texto-suave: #b8c0cf;
     --destaque: #8ab4ff;
     --borda: #364052;
+    --erro: #ff9b8f;
   }
 }
 
@@ -51,3 +53,66 @@ a { color: var(--destaque); }
   margin: 0 auto;
   padding: 16px;
 }
+
+.cartao {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.novo-post {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.novo-post label { font-weight: 600; }
+
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  background: var(--fundo);
+  color: var(--texto);
+  resize: vertical;
+}
+
+button {
+  justify-self: start;
+  min-height: 44px;
+  padding: 8px 20px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--destaque);
+  color: var(--fundo);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.erro { margin: 0; color: var(--erro); }
+
+.vazio { color: var(--texto-suave); }
+
+.posts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.post-texto {
+  margin: 0 0 8px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.post-data { color: var(--texto-suave); font-size: 0.875rem; }
