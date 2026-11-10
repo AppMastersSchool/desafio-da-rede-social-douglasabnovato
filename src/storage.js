@@ -3,6 +3,7 @@
 // O armazenamento é injetável: nos testes, um objeto em memória.
 
 const CHAVE_POSTS = "rede-social:posts";
+const CHAVE_AUTOR = "rede-social:autor";
 
 export class Storage {
   constructor(area = globalThis.localStorage) {
@@ -46,6 +47,16 @@ export class Storage {
     else posts.unshift(post);
     this.savePosts(posts);
     return post;
+  }
+
+  /** Id do usuário que está publicando (desafio 1), ou null. */
+  getAutorAtual() {
+    const id = this.ler(CHAVE_AUTOR, null);
+    return typeof id === "string" ? id : null;
+  }
+
+  saveAutorAtual(id) {
+    this.gravar(CHAVE_AUTOR, id);
   }
 }
 

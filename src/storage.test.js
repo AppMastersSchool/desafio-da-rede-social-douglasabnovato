@@ -61,3 +61,13 @@ describe("Storage", () => {
     expect(JSON.parse(localStorage.getItem("rede-social:posts"))).toEqual([{ id: "z", texto: "no navegador" }]);
   });
 });
+
+describe("Storage: autor atual", () => {
+  it("lê null quando não há autor e grava o id", () => {
+    const dados = {};
+    const s = new Storage({ getItem: (k) => (k in dados ? dados[k] : null), setItem: (k, v) => { dados[k] = v; } });
+    expect(s.getAutorAtual()).toBeNull();
+    s.saveAutorAtual("carla");
+    expect(s.getAutorAtual()).toBe("carla");
+  });
+});

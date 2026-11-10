@@ -127,3 +127,28 @@ button {
 }
 
 .post-nome { font-weight: 600; }
+
+.topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.seletor-autor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.seletor-autor label { font-weight: 600; }
+
+select {
+  min-height: 44px;
+  padding: 6px 8px;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  background: var(--fundo);
+  color: var(--texto);
+}
